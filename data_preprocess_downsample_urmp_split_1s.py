@@ -10,10 +10,12 @@ import subprocess
 import librosa
 import numpy as np
 import time
-
+print('Warnnig: plz delete the last file form the Tuba and Horn (they have 255 but should have 254 bcoz video clips =254')
 # current_path = os.path.dirname(__file__)
 present_path=os.path.dirname(__file__)
 dirs = glob.glob(os.path.join(present_path, 'video_raw/*'))
+if not os.path.exists("audio_downsampled"):
+	os.makedirs("audio_downsampled")
 pre_outputfolder='audio_downsampled/'
 
 
@@ -52,14 +54,15 @@ for dir in dirs:
 		end_idx=start_idx+16384
 		slice_sig = wav[start_idx:end_idx]
 		clip_name="img_"+str(i)+".wav"
-		
+
 		print(i)
 		scipy.io.wavfile.write(os.path.join("audio_processed/"+str(dir_name),clip_name), sample_rate, slice_sig)
 	os.remove(filepath)
-	
-	
-	
-	
+os.rmdir('audio_downsampled')
+print('Warnnig: plz delete the last file form the Tuba and Horn (they have 255 but should have 254 bcoz video clips =254')
+
+
+
 	#print(len(speakers))
 	# for speaker in speakers:
 	# 	files = [ glob.glob(speaker+'/*')]
